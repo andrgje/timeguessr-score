@@ -113,3 +113,20 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
              return_msg,
              status_code=200
         )
+
+
+@app.function_name(name='testEnv')
+@app.route(route="testEnv",methods=["get"])
+def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
+    
+    return_msg = os.getenv('db_user')
+    return_msg = return_msg + os.getenv('db_password')
+    return_msg = return_msg + os.getenv('db_host')
+    return_msg = return_msg + os.getenv('db_port')
+    return_msg = return_msg + os.getenv('db_name')
+
+
+    return func.HttpResponse(
+             return_msg,
+             status_code=200
+        )
