@@ -26,8 +26,8 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
 
     
     
-    cnx = db.connect(user=f"{os.getenv("db_user")}", password=f"{os.getenv("db_password")}", host=f"{os.getenv("db_host")}", port=f'{os.getenv("db_port")}', database=f"{os.getenv("db_name")}")
-    
+    cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
+   
     cur = cnx.cursor()
 
     cur.execute(f"INSERT INTO tg.results(playerid,playername,timeguessrversion,result,message_time,timestamp) VALUES ('{player_id}','{player}',{version},{score},'{msg_timestamp}','{datetime.datetime.now()}')")
@@ -61,11 +61,10 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
         )
     
     
-    cnx = db.connect(user=f"{os.getenv("db_user")}", password=f"{os.getenv("db_password")}", host=f"{os.getenv("db_host")}", port=f'{os.getenv("db_port")}', database=f"{os.getenv("db_name")}")
-    
+    cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
     cur = cnx.cursor()
 
-    query = sql.SQL("SELECT r.playername,MAX(r.result) FROM tg.results r JOIN tg.dateversion d ON r.timeguessrversion = d.version WHERE d.date = %s GROUP BY r.playername ORDER BY MAX(result) DESC")
+    query = sql.SQL("SELECT r.playername,MAX(r.result), d.date FROM tg.results r JOIN tg.dateversion d ON r.timeguessrversion = d.version WHERE d.date = %s GROUP BY r.playername, d.date ORDER BY MAX(result) DESC")
     cur.execute(query,(date,))
     result = cur.fetchall()
 
@@ -90,8 +89,8 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     
-    cnx = db.connect(user=f"{os.getenv("db_user")}", password=f"{os.getenv("db_password")}", host=f"{os.getenv("db_host")}", port=f'{os.getenv("db_port")}', database=f"{os.getenv("db_name")}")
-    
+    cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
+   
     cur = cnx.cursor()
 
     query = sql.SQL("SELECT r.playername,r.result, d.date FROM tg.results r JOIN tg.dateVersion d ON r.timeguessrVersion = d.version ORDER BY result DESC")
