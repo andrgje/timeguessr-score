@@ -13,7 +13,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     body = req.get_json()
-    msg = body['body']['content']
+    msg = body['body']['body']['content']
 
     score = int(msg.split('/')[0][-6:].replace(',',''))
     version = int(msg[15:18])
