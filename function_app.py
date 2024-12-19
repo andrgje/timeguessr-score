@@ -86,7 +86,11 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
 @app.function_name(name='allTimeTop10')
 @app.route(route="allTimeTop10",methods=["get"])
 def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+    logging.info(os.getenv('db_user'))
+    logging.info(os.getenv('db_password'))
+    logging.info(os.getenv('db_host'))
+    logging.info(os.getenv('db_port'))
+    logging.info(os.getenv('db_name'))
 
     
     cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
