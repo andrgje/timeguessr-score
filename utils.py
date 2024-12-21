@@ -41,10 +41,10 @@ def generate_leaderboard_card(title,rows):
             {
                 "type": "Table",
                 "columns": [
-                    {"width": "auto"},
-                    {"width": "stretch"},
-                    {"width": "auto"},
-                    {"width": "auto"}
+                    {"width": "30"},
+                    {"width": "100"},
+                    {"width": "50"},
+                    {"width": "50"}
                 ],
                 "rows": []
             }
@@ -57,10 +57,10 @@ def generate_leaderboard_card(title,rows):
         "type": "TableRow",
         "style": "emphasis",
         "cells": [
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": False}]},
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Name", "weight": "Bolder", "wrap": True}]},
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": False}]},
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": False}]}
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": True}]},
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": True}]}
         ]
     }
     card["body"][1]["rows"].append(header_row)
@@ -70,10 +70,10 @@ def generate_leaderboard_card(title,rows):
         row = {
             "type": "TableRow", 
             "cells": [
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(place), "wrap": False}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": name, "wrap": False}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(score), "horizontalAlignment": "Center", "wrap": False}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "wrap": False}]}
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(place), "wrap": True}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": name, "wrap": True}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(score), "horizontalAlignment": "Center", "wrap": True}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "wrap": True}]}
             ]
         }
         card["body"][1]["rows"].append(row)
