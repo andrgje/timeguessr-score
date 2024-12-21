@@ -4,7 +4,9 @@ import psycopg2 as db
 from psycopg2 import sql
 import os
 import datetime
-from utils import create_table
+from utils import create_table,generate_leaderboard_card
+
+
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 @app.function_name(name = 'newResult')
@@ -86,18 +88,12 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
 @app.function_name(name='allTimeTop10')
 @app.route(route="allTimeTop10",methods=["get"])
 def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info(os.getenv('db_user'))
-    logging.info(os.getenv('db_password'))
-    logging.info(os.getenv('db_host'))
-    logging.info(os.getenv('db_port'))
-    logging.info(os.getenv('db_name'))
-
     
     cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
    
     cur = cnx.cursor()
 
-    query = sql.SQL("SELECT r.playername,r.result, d.date FROM tg.results r JOIN tg.dateVersion d ON r.timeguessrVersion = d.version ORDER BY result DESC")
+    query = sql.SQL("SELECT ROW_NUMBER() OVER(ORDER BY r.result desc), r.playername,r.result, d.date FROM tg.results r JOIN tg.dateVersion d ON r.timeguessrVersion = d.version ORDER BY result DESC")
     cur.execute(query)
     result = cur.fetchmany(10)
 
@@ -107,7 +103,7 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
     cnx.close()
     return_msg = f'All time top 10 scores'
 
-    return_msg = return_msg + create_table(result)
+    return_msg = generate_leaderboard_card(return_msg,result)
 
     return func.HttpResponse(
              return_msg,
