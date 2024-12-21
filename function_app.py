@@ -66,7 +66,7 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
     cnx = db.connect(user=f"{os.getenv('db_user')}", password=f"{os.getenv('db_password')}", host=f"{os.getenv('db_host')}", port=f"{os.getenv('db_port')}", database=f"{os.getenv('db_name')}") 
     cur = cnx.cursor()
 
-    query = sql.SQL("SELECT r.playername,MAX(r.result), d.date FROM tg.results r JOIN tg.dateversion d ON r.timeguessrversion = d.version WHERE d.date = %s GROUP BY r.playername, d.date ORDER BY MAX(result) DESC")
+    query = sql.SQL("SELECT ROW_NUMBER() OVER(ORDER BY MAX(r.result),r.playername,MAX(r.result), d.date FROM tg.results r JOIN tg.dateversion d ON r.timeguessrversion = d.version WHERE d.date = %s GROUP BY r.playername, d.date ORDER BY MAX(result) DESC")
     cur.execute(query,(date,))
     result = cur.fetchall()
 
@@ -76,7 +76,7 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
     cnx.close()
     return_msg = f'Leaderboard for date {date}'
 
-    return_msg = return_msg+create_table(result)
+    return_msg = create_table(result)
     
 
     return func.HttpResponse(

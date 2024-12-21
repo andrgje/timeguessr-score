@@ -41,10 +41,10 @@ def generate_leaderboard_card(title,rows):
             {
                 "type": "Table",
                 "columns": [
-                    {"width": "30"},
-                    {"width": "100"},
-                    {"width": "50"},
-                    {"width": "50"}
+                    {"width": "25px"},
+                    {"width": "150px"},
+                    {"width": "55px"},
+                    {"width": "80git px"}
                 ],
                 "rows": []
             }
@@ -60,7 +60,7 @@ def generate_leaderboard_card(title,rows):
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Name", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": True}]},
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": True}]}
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "spacing":"None","wrap": True}]}
         ]
     }
     card["body"][1]["rows"].append(header_row)
@@ -73,7 +73,7 @@ def generate_leaderboard_card(title,rows):
                 {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(place), "wrap": True}]},
                 {"type": "TableCell", "items": [{"type": "TextBlock", "text": name, "wrap": True}]},
                 {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(score), "horizontalAlignment": "Center", "wrap": True}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "wrap": True}]}
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "spacing":"None", "wrap": True}]}
             ]
         }
         card["body"][1]["rows"].append(row)
