@@ -76,7 +76,7 @@ def dailyLeaderBoard(req: func.HttpRequest) -> func.HttpResponse:
     cnx.close()
     return_msg = f'Leaderboard for date {date}'
 
-    
+    return_msg = generate_leaderboard_card(return_msg,result)
 
     return func.HttpResponse(
              return_msg,
