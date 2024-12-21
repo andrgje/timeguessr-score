@@ -57,7 +57,7 @@ def generate_leaderboard_card(title,rows):
         "type": "TableRow",
         "style": "emphasis",
         "cells": [
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": True}]},
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "#", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Name", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": True}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "spacing":"None","wrap": True}]}
