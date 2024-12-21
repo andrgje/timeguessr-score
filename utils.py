@@ -28,7 +28,7 @@ def generate_leaderboard_card(title,rows):
     # Table header definition
     card = {
         "type": "AdaptiveCard",
-        "version": "1.4",
+        "version": "1.2",
         "body": [
             {
                 "type": "TextBlock",
@@ -57,10 +57,10 @@ def generate_leaderboard_card(title,rows):
         "type": "TableRow",
         "style": "emphasis",
         "cells": [
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": True}]},
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Place", "weight": "Bolder", "wrap": False}]},
             {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Name", "weight": "Bolder", "wrap": True}]},
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": True}]},
-            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": True}]}
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Score", "weight": "Bolder", "wrap": False}]},
+            {"type": "TableCell", "items": [{"type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": False}]}
         ]
     }
     card["body"][1]["rows"].append(header_row)
@@ -68,12 +68,12 @@ def generate_leaderboard_card(title,rows):
     # Add rows dynamically from input
     for place, name, score, date in rows:
         row = {
-            "type": "TableRow",
+            "type": "TableRow", 
             "cells": [
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(place), "wrap": True}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": name, "wrap": True}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(score), "horizontalAlignment": "Center", "wrap": True}]},
-                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "wrap": True}]}
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(place), "wrap": False}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": name, "wrap": False}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(score), "horizontalAlignment": "Center", "wrap": False}]},
+                {"type": "TableCell", "items": [{"type": "TextBlock", "text": str(date), "wrap": False}]}
             ]
         }
         card["body"][1]["rows"].append(row)
